@@ -1,43 +1,20 @@
-# k3d
+# K3D
 
-[Refence](https://k3d.io/v5.0.0/)
+k3d is a lightweight wrapper to run k3s (Rancher Lab’s minimal Kubernetes distribution) in docker.
 
-## Rancher
+## Install
 
-https://rancher.<HOST_IP>.nip.io:44380
+Use homebrew to install k3d in Mac.
 
-本地安裝
+```
+brew install k3d
+```
+
+Create a cluster
 
 ```
 make create-cluster
-make install-rancher
 ```
-
-第一次進入 Rancher
-
-```
-# 登錄 admin/1qaz2wsx
-https://rancher.<HOST_IP>.nip.io:8443
-# 首次登錄，會提示設定 Rancher Server URL，設為下方 url
-https://rancher.<HOST_IP>.nip.io:8443
-```
-
-> GET HOST IP `ifconfig | grep inet`
-
-添加一個 cluster 到 rancher
-
-```
-# browser 登錄 rancher
-cluster management => import existing => Generic => 輸入資訊
-# kubernetes cli
-# switch to 要加入管理的 cluster
-kubectl config use-context <cluster name>
-# apply rancher agent 到 <cluster name>
-kubectl apply -f https://rancher.<HOST_IP>.nip.io:8443/v3/import/rcwqgfbqzltgfkfhqwd8qtzhwqk85n4td4xl6q6hqrnkgqnjrhjbnj_c-m-4vlr229q.yaml
-
-```
-
-> 如有連線上的問題，可先下載，執行 kubectl apply -f rancher_agent.yaml
 
 ## Argo
 
