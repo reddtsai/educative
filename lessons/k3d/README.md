@@ -2,6 +2,10 @@
 
 k3d is a lightweight wrapper to run k3s (Rancher Lab’s minimal Kubernetes distribution) in docker.
 
+> k3d version v5.7.4
+
+> k3s version v1.30.4-k3s1 (default)
+
 ## Install
 
 Use homebrew to install k3d in Mac.
@@ -16,13 +20,10 @@ Create a cluster
 make create-cluster
 ```
 
-## Argo
+Disable Traefik
 
 ```
-helm repo add argo https://argoproj.github.io/argo-helm
-helm repo update
-helm install argo-cd argo/argo-cd --namespace argocd --create-namespace
-kubectl get pods -n argocd
+--k3s-arg '--disable=traefik@server:*'
 ```
 
 ## COMMAND

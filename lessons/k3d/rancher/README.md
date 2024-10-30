@@ -2,6 +2,8 @@
 
 Rancher is a Kubernetes management tool to deploy and run clusters anywhere and on any provider.
 
+> Version 2.9.3
+
 ## Install
 
 Install Rancher with Helm.
