@@ -51,6 +51,8 @@ istioctl install -f profile.yaml
 
 ## Demo
 
+port-forward
+
 ```
 istioctl install -f demo-profile-no-gateways.yaml -y
 kubectl label namespace default istio-injection=enabled
@@ -63,11 +65,16 @@ kubectl port-forward svc/bookinfo-gateway-istio 8080:80
 
 Open your browser and navigate to http://localhost:8080/productpage
 
+LB
+
 ```
-kubectl get services
-kubectl get pods
-kubectl get gateway
+istioctl install -y
+kubectl label namespace default istio-injection=enabled
+kubectl apply -f bookinfo.yaml
+kubectl apply -f bookinfo-istio-gateway.yaml
 ```
+
+http://localhost:<k3d_lb_port>/productpage
 
 ## Addons
 

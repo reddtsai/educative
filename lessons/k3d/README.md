@@ -60,3 +60,14 @@ sslip.io
 | 8080 | 8443  |
 | 9080 | 9443  |
 | 9081 |       |
+
+## Monitoring
+
+```
+kubectl create namespace monitoring
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --namespace monitoring
+helm repo add grafana https://grafana.github.io/helm-charts
+helm install loki grafana/loki-stack --namespace monitoring
+helm install grafana grafana/grafana --namespace monitoring
+```
