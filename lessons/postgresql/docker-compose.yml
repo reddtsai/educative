@@ -1,0 +1,28 @@
+version: '3.8'
+
+x-postgres-common:
+  &postgres-common
+  image: postgres:17
+
+services:
+  auth-primary-db:
+    <<: *postgres-common
+    container_name: auth-primary-db
+    environment:
+      POSTGRES_DB: auth
+      POSTGRES_PASSWORD: 1qaz2wsx
+    volumes:
+      - ./data/master:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+
+  auth-replica-db:
+    <<: *postgres-common
+    container_name: auth-replica-db
+    environment:
+      POSTGRES_PASSWORD: 1qaz2wsx
+    volumes:
+      - ./data/replica:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"

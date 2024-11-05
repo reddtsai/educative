@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  dns:
+    image: andyshinn/dnsmasq:latest
+    container_name: dns
+    platform: linux/amd64
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - ./dnsmasq.conf:/etc/dnsmasq.conf
+
+  porxy:
+    image: traefik:v3.2
+    container_name: traefik
+    platform: linux/amd64
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml
+      - ./traefik/dynamic:/etc/traefik/dynamic
+      - ./traefik/log:/var/log
+
+
+    
