@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  dns:
+    image: andyshinn/dnsmasq:latest
+    container_name: dns
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - ./dnsmasq.conf:/etc/dnsmasq.conf
