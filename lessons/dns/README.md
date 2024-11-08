@@ -1,5 +1,11 @@
 # DNS
 
+```mermaid
+flowchart LR
+    A[fa:fa-user User] -- domian.com --> DNS
+    DNS --> P[Reverse Proxy]
+```
+
 當使用者在瀏覽器的 URL 列中鍵入網域名稱時，DNS 伺服器負責將這些網域名稱轉換為數字 IP 位址，從而引導他們存取正確的網站。
 
 ## Install With Docker
@@ -20,10 +26,19 @@ helm install cert-manager jetstack/cert-manager --namespace cert-manager --creat
 curl -kivL -H 'Host: whoami.reddtsai.org' 'http://192.168.1.110'
 ```
 
-kubectl get crd certificaterequests.cert-manager.io
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.1/cert-manager.yaml
+## Use Clound DNS
 
-kubectl get issuer -o wide
-kubectl get certificateRequest -o wide
-kubectl get certificates
-kubectl describe secret <secret name>
+AWS Route 53:
+由 Amazon Web Services 提供的雲端 DNS 服務，支持全球的高可用性和擴展性。
+
+Google Cloud DNS:
+由 Google Cloud 提供的高效、可靠的 DNS 服務，具有低延遲和高可用性。
+
+Azure DNS:
+由 Microsoft Azure 提供的 DNS 服務，可將域名解析為 Azure 服務的 IP 地址。
+
+Cloudflare DNS:
+提供免費和付費的 DNS 服務，具有高性能和強大的 DDoS 防護。
+
+Dyn Managed DNS:
+Oracle 提供的 DNS 服務，以其高可用性和可靠性著稱。

@@ -45,7 +45,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - "*.reddtsai.org"
+        - "whoami.reddtsai.org"
       secretName: reddtsai-ingress-secret
   rules:
     - host: whoami.reddtsai.org
