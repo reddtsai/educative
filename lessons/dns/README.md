@@ -1,9 +1,18 @@
 # DNS
 
 ```mermaid
-flowchart LR
-    A[fa:fa-user User] -- domian.com --> DNS
-    DNS --> P[Reverse Proxy]
+sequenceDiagram
+    actor User
+    participant dns as DNS
+    participant proxy as Reverse Proxy
+    participant whoami as whoami server
+
+    User->>dns: Request [whoami.domain.com]
+    dns->>User: IP Address of Reverse Proxy
+    User->>proxy: HTTP Request
+    proxy->>whoami: Forward Request
+    whoami->>proxy: Response
+    proxy->>User: Forward Response
 ```
 
 當使用者在瀏覽器的 URL 列中鍵入網域名稱時，DNS 伺服器負責將這些網域名稱轉換為數字 IP 位址，從而引導他們存取正確的網站。
