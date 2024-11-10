@@ -26,48 +26,13 @@ Disable Traefik
 --k3s-arg '--disable=traefik@server:*'
 ```
 
-## COMMAND
-
-kubectl
-
-```
-kubectl config view
-kubectl get node
-kubectl get namespace
-kubectl get pod -n <namespace>
-kubectl get ingress -n <namespace>
-kubectl describe ingress <ingress> -n <namespace>
-kubectl logs <pod> -n <namespace>
-```
-
-helm
-
-```
-helm search repo
-helm install
-helm get values <repo> -n <namespace>
-```
-
-## DNS
+## Wildcard Domain
 
 nip.io
 sslip.io
 
-## IP
+## Reference
 
-| http | https |
-| ---- | ----- |
-| 8080 | 8443  |
-| 9080 | 9443  |
-| 9081 |       |
+[K3S](https://docs.k3s.io/)
 
-## Monitoring
-
-```
-kubectl create namespace monitoring
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --namespace monitoring
-helm repo add grafana https://grafana.github.io/helm-charts
-helm install loki grafana/loki-stack --namespace monitoring
-helm install grafana grafana/grafana --namespace monitoring
-```
+[K3D](https://k3d.io/v5.0.0/)
