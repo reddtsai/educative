@@ -38,11 +38,11 @@ kind: Ingress
 metadata:
   name: reddtsai-ingress
   annotations:
-    kubernetes.io/ingress.ingressClassName: traefik
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.middlewares: default-redirect-to-https@kubernetescrd
     cert-manager.io/issuer: reddtsai-org-issuer
 spec:
+  ingressClassName: traefik
   tls:
     - hosts:
         - "whoami.reddtsai.org"

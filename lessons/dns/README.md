@@ -35,7 +35,7 @@ helm install cert-manager jetstack/cert-manager --namespace cert-manager --creat
 curl -kivL -H 'Host: whoami.reddtsai.org' 'http://192.168.1.110'
 ```
 
-## Use Clound DNS
+## Use Cloud DNS
 
 AWS Route 53:
 由 Amazon Web Services 提供的雲端 DNS 服務，支持全球的高可用性和擴展性。
