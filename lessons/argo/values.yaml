@@ -1,0 +1,34 @@
+global:
+  domain: argocd.reddtsai.org
+
+configs:
+  params:
+    server.insecure: true
+
+controller:
+  podAnnotations:
+    sidecar.istio.io/inject: "false"
+
+applicationSet:
+  podAnnotations:
+    sidecar.istio.io/inject: "false"
+
+dex:
+  podAnnotations:
+    sidecar.istio.io/inject: "false"
+
+notifications:
+  podAnnotations:
+    sidecar.istio.io/inject: "false"
+
+repoServer:
+  podAnnotations:
+    sidecar.istio.io/inject: "false"
+
+redisSecretInit:
+  podAnnotations:
+    sidecar.istio.io/inject: "false"
+
+redis:
+  podAnnotations:
+    sidecar.istio.io/inject: "false"

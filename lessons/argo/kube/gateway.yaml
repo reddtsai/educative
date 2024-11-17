@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: ca-issuer
+  name: argocd-ca-issuer
   namespace: istio-system
 spec:
   selfSigned: {}
@@ -10,7 +10,7 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: argo-ca
+  name: argocd-ca
   namespace: istio-system
 spec:
   dnsNames:
@@ -18,18 +18,18 @@ spec:
   isCA: true
   duration: 2160h
   renewBefore: 360h
-  commonName: argo.reddtsai.org
+  commonName: argocd.reddtsai.org
   subject:
     organizations:
       - reddtsai
     organizationalUnits:
       - reddtsai.org
-  secretName: argo-ca-secret
+  secretName: argocd-ca-secret
   privateKey:
     algorithm: ECDSA
     size: 256
   issuerRef:
-    name: ca-issuer
+    name: argocd-ca-issuer
     kind: Issuer
     group: cert-manager.io
 
@@ -38,6 +38,7 @@ apiVersion: networking.istio.io/v1
 kind: Gateway
 metadata:
   name: argocd-gateway
+  namespace: argocd
 spec:
   selector:
     istio: ingressgateway
@@ -47,7 +48,7 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - "argo.reddtsai.org"
+        - "argocd.reddtsai.org"
       tls:
         httpsRedirect: true
     - port:
@@ -55,9 +56,9 @@ spec:
         name: https
         protocol: HTTPS
       hosts:
-        - "argo.reddtsai.org"
+        - "argocd.reddtsai.org"
       tls:
-        credentialName: argo-ca-secret
+        credentialName: argocd-ca-secret
         mode: SIMPLE
 
 ---
@@ -65,16 +66,14 @@ apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: argocd-virtualservice
+  namespace: argocd
 spec:
   hosts:
-    - "argo.reddtsai.org"
+    - "*"
   gateways:
     - argocd-gateway
   http:
-    - match:
-        - uri:
-            prefix: /argocd
-      route:
+    - route:
         - destination:
             host: argocd-server
             port:

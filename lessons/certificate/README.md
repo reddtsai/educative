@@ -39,6 +39,7 @@ helm install cert-manager jetstack/cert-manager --namespace cert-manager --creat
 Verify
 
 ```
+helm status cert-manager -n cert-manager
 kubectl get issuer -o wide
 kubectl get certificateRequest -o wide
 kubectl get certificates
