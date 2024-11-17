@@ -17,12 +17,18 @@ sequenceDiagram
 
 當使用者在瀏覽器的 URL 列中鍵入網域名稱時，DNS 伺服器負責將這些網域名稱轉換為數字 IP 位址，從而引導他們存取正確的網站。
 
-## Install With Docker
+## Install DNS
+
+Create dnsmasq with docker.
 
 ```
 # 建立 dnsmasq
 docker compose up -d
-# 建立 k3d 和憑諝管理
+```
+
+Create cert-manager with K3D.
+
+```
 k3d cluster create dev-reddtsai-org --api-port 6550 --port 80:80@loadbalancer --port 443:443@loadbalancer --agents 1
 helm repo add jetstack https://charts.jetstack.io --force-update
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.16.1 --set crds.enabled=true
